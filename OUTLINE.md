@@ -49,9 +49,9 @@ Receives share links, can vote (not drag and drop),
 
   As a creator, I must enter an email when creating a poll, because I need to receive notifications and access administrative features.
 
-4. When a poll is finished being created, the user is given two links: an administrative link (which lets them access the results) and a share link (which the creaotr sends to their friends)
+4. When a poll is finished being created, the Creator is given two links: an administrative link (which lets them access the results) and a share link (which the creaotr sends to their friends)
 
-  As a creator, when I finish creating a poll, I want to receive two links: an administrative link to access the results and a share link, because I want to be able to access administrative features and I want to be able to share my polls with my friends.
+  As a creator, when I finish creating a poll, I want to receive two links: an administrative link to access the results and a share link, because I want to be able to access results and I want to be able to share my polls with my friends.
 
 5. The links are also sent to the creator via email (using mailgun(https://www.mailgun.com/))
 
@@ -59,45 +59,42 @@ Receives share links, can vote (not drag and drop),
 
 6. When a user visits the submission link, they enter their name if required and see a list of the choices for that poll (ask Warren if they need to add their name or just vote without registration)
 
-  As a user, when I visit the submission link, I want to be able to enter my name if required, because I want to view a list of choices for the poll.
+  As a user, when I visit the submission link, I want to be able to view the poll, because I want to see a list of choices for the poll.
 
-7. The user can rank the choices (by drag and drop, or some other method) and then submits the poll (ASK WARREN!!!)
+7. The user can rank the choices (by drag and drop, or some other method) and then submits the poll.
 
   As a user, I want to be able to rank the choices in the poll using a drag-and-drop reorder or other method, because I want the creator to see my preferences in my preferred order.
 
-8. Each time a submission is received, the creator is notified with an email (which includes the administrative link and a link to the results) ()
+8. Each time a submission is received, the creator is notified with an email (which includes the administrative link and a link to the results).
 
-  As a user, when I submit my response to a poll, I want the creator to be notified via an email, because I want them to receive my responses.
+  As a user, when I submit my response to a poll, I want the creator to be notified via an email, because I want them to receive my response.
 
 * the results are ranked using the Borda Count method: https://en.wikipedia.org/wiki/Borda_count
 
-  As a creator, I want the results of the poll to be ranked using the Borda Count method, because it provides a fair and reliable way to aggregate preferences and determine the overall ranking of choices.
+  As a creator, I want the results of the poll to be ranked using the Borda Count method, because it provides a fair and reliable way to determine the overall ranking of choices.
 
 ## Database and Nouns / Tables 
-` database: midterm ` within midterm db, we have 2 tables `creator`, `user`, `polls`, 
+` database: midterm ` within midterm db, we have 2 tables `polls` and `submissions`, 
 
 ### Tables
 
-#### Creator
-- creator id
+#### Polls
+- poll_id (PK)
 - email
-- admin link
-- share link
-- FK for polls table
-
-#### users
-- user id
-- we need to keep track of their submission
-
-#### poll
-- id
-- creator id
-- how user interacts with this table
+- admin_link
+- share_link
 - title
-- option 1
-- option 2
-- option 3
-- option 4
+- option_1
+- option_2
+- option_3
+- option_4
+
+#### Submissions
+- poll_id (FK referencing Polls table)
+- rank_1
+- rank_2
+- rank_3
+- rank_4
 
 ## ERD
 - Charley
