@@ -4,3 +4,45 @@ body,
 html {
   margin: 0;
 }
+
+#greeting {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#underHeading {
+  margin-top: -15px;
+}
+
+#inputTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the table horizontally */
+  align-items: center; /* Center the table vertically */
+  height: 314px; /* Set height for vertical centering */
+  width: 307px;
+  font-size: 10px;
+  margin-top: 25px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+}
+
+#decisionTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the inputs horizontally */
+  justify-content: space-evenly;
+}
+
+button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #2f82e2;
+  border-radius: 1px;
+  font-size: 10px;
+  padding: 10px;
+  text-decoration: none;
+}
