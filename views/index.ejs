@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Decision Maker</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -18,7 +18,42 @@
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('partials/_header') %>
+  <!-- Greeting user will see once login -->
+  <div id="greeting">
+    <h1>Make A Decision!</h1>
+    <p id="underHeading">Once you're ready, make some desicions!</p>
+  </div>
+
+  <!-- Input table starts here -->
+  <div id="inputTable">
+    <form action="/" method="POST">
+      <table id="decisionTable">
+        <tbody>
+          <tr class="tableTextBox">
+            <input type="text" name="decision1" placeholder="What is your Decision" />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision2" placeholder="Now, what else would you like to do..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision3" placeholder="What else would you like to do..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision4" placeholder="Almost Done..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision5" placeholder="Last One..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="adminEmail" placeholder="Now, what's your email..." />
+          </tr>
+        </tbody>
+      </table>
+      <!--Input Table ends-->
+      <button>Submit</button>
+    </form>
+  </div>
 </body>
 
 </html>
