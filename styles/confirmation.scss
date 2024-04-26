@@ -1,0 +1,16 @@
+#confirmation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+#confirmation_header {
+  font-size: 4em;
+  margin-bottom: -10px;
+}
+
+#confirmation_text {
+  font-size: 25px;
+}
