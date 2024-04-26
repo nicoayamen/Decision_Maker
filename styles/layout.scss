@@ -17,12 +17,19 @@ html {
   margin-top: -15px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+
 #inputTable {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center the table horizontally */
-  align-items: center; /* Center the table vertically */
-  height: 314px; /* Set height for vertical centering */
+  justify-content: center; 
+  align-items: center; 
+  height: 314px; 
   width: 307px;
   font-size: 10px;
   margin-top: 25px;
