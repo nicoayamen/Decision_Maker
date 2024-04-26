@@ -6,6 +6,7 @@ CREATE TABLE polls (
   admin_link VARCHAR(255),
   share_link VARCHAR(255),
   title VARCHAR(255),
+  description VARCHAR(255),
   option_1 VARCHAR(255),
   option_2 VARCHAR(255),
   option_3 VARCHAR(255),
