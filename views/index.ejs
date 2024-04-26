@@ -27,31 +27,32 @@
 
   <!-- Input table starts here -->
   <div id="inputTable">
-    <table id="decisionTable">
-      <tbody>
-        <tr class="tableTextBox">
-          <input type="text" name="decision1" placeholder="What is your Decision" />
-        </tr>
-        <tr class="tableTextBox">
-          <input type="text" name="decision2" placeholder="Now, what else would you like to do..." />
-        </tr>
-        <tr class="tableTextBox">
-          <input type="text" name="decision3" placeholder="What else would you like to do..." />
-        </tr>
-        <tr class="tableTextBox">
-          <input type="text" name="decision4" placeholder="Almost Done..." />
-        </tr>
-        <tr class="tableTextBox">
-          <input type="text" name="decision5" placeholder="Last One..." />
-        </tr>
-        <tr class="tableTextBox">
-          <input type="text" name="adminEmail" placeholder="Now, what's your email..." />
-        </tr>
-      </tbody>
-
-    </table>
-    <!--Input Table ends-->
-    <button>Submit</button>
+    <form action="/" method="POST">
+      <table id="decisionTable">
+        <tbody>
+          <tr class="tableTextBox">
+            <input type="text" name="decision1" placeholder="What is your Decision" />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision2" placeholder="Now, what else would you like to do..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision3" placeholder="What else would you like to do..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision4" placeholder="Almost Done..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="decision5" placeholder="Last One..." />
+          </tr>
+          <tr class="tableTextBox">
+            <input type="text" name="adminEmail" placeholder="Now, what's your email..." />
+          </tr>
+        </tbody>
+      </table>
+      <!--Input Table ends-->
+      <button>Submit</button>
+    </form>
   </div>
 </body>
 
