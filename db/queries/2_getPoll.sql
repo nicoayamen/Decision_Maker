@@ -1,4 +1,4 @@
--- Query: GET POLL
+-- Query: Get Poll
 
 -- This query will be used in the getPoll helper function.
 -- The getPoll function will select the polls details from the database.
