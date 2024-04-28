@@ -1,6 +1,7 @@
+// users.js
 const db = require('../connection');
 
-// addPoll helper function
+console.log('addPoll file loaded');
 
 // addPoll helper function
 const addPoll = (pollDetails) => {
@@ -18,7 +19,7 @@ const addPoll = (pollDetails) => {
   } = pollDetails;
 
   // addPoll SQL query insert into the 'polls' table
-  const addPollQuery = `
+  const addPoll = `
     INSERT INTO polls (poll_id, email, admin_link, share_link, title, description, option_1, option_2, option_3, option_4)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *`;
@@ -26,7 +27,7 @@ const addPoll = (pollDetails) => {
   // parameters for the SQL query
   const values = [poll_id, email, admin_link, share_link, title, description, option_1, option_2, option_3, option_4];
 
-  return db.query(addPollQuery, values)
+  return db.query(addPoll, values)
     .then(data => {
       return data.rows[0]; // returns the inserted poll
     })
@@ -39,7 +40,7 @@ const addPoll = (pollDetails) => {
 
 // calling the function with test data
 addPoll({
-  poll_id: '16',
+  poll_id: '366',
   email: 'test@test.com',
   admin_link: 'admin_link_1',
   share_link: 'share_link_1',
