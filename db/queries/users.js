@@ -1,6 +1,5 @@
 // users.js
 const db = require('../connection');
-const addPoll = require('./addPoll');
 
 // example provided
 const getUsers = () => {
