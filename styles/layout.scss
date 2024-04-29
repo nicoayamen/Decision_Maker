@@ -6,6 +6,7 @@ html {
 }
 
 #greeting {
+  font-size: 1.5rem;
   margin-top: 70px;
   display: flex;
   flex-direction: column;
@@ -13,8 +14,9 @@ html {
   align-items: center;
 }
 
-#underHeading {
+.underHeading {
   margin-top: -15px;
+  font-size: 1em;
 }
 
 form {
@@ -52,4 +54,26 @@ button {
   font-size: 10px;
   padding: 10px;
   text-decoration: none;
+}
+
+.draggable {
+  display: flex;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#decList {
+  list-style-type: none;
+  padding: 0;
+}
+.decItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  background-color: #f9f9f9;
+}
+.dragging {
+  opacity: 0.5;
 }
