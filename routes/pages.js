@@ -5,6 +5,6 @@ const router  = express.Router();
 router.get('/confirm', (req, res) => {
   console.log(`Route here`);
   res.render('index_confirmation_page');
-}); 
+});
 
 module.exports = router;
