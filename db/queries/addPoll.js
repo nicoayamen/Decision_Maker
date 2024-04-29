@@ -1,4 +1,4 @@
-// users.js
+// addPoll.js
 const db = require('../connection');
 
 // addPoll helper function
