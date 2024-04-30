@@ -3,7 +3,7 @@ Here is where we break outline the requirements for the mid term project
 
 ## Requirements:
 - a user can create a poll with multiple choices
-- each choice can have a title and optional description
+- each choice can have a title
 - the creator must enter an email
 - when a poll is finished being created, the user is given two links: an administrative link (which lets them access the results) and a submission link (which the user sends to their friends)
 - the links are also sent to the creator via email (using mailgun)
@@ -41,9 +41,9 @@ Receives share links, can vote (not drag and drop),
 
   As a Creator, I can create a poll with multiple choices, because I want to gather opinions from my friends.
 
-2. Each choice can have a title and optional description
+2. Each choice can have a title
 
-  As a Creator, I can add titles and optional descriptions to each choice in the poll, because I want to provide context for each option.
+  As a Creator, I can add titles to each choice in the poll, because I want to provide context for each option.
 
 3. The creator must enter an email
 

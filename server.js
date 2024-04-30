@@ -3,6 +3,8 @@
 require('dotenv').config();
 // require the addPoll file for the addPoll helper function
 const { addPoll } = require('./db/queries/addPoll');
+// // require the getPoll file for the getPoll helper function
+// const { getPoll } = require('./db/queries/getPoll');
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
