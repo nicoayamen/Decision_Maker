@@ -1,3 +1,4 @@
+// server.js
 // load .env data into process.env
 require('dotenv').config();
 // require the addPoll file for the addPoll helper function
@@ -56,24 +57,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-
-// calling the function with test data
-addPoll({
-  poll_id: '3654',
-  email: 'test@test.com',
-  admin_link: 'admin_link_1',
-  share_link: 'share_link_1',
-  title: 'Test Poll 1',
-  description: 'Description for Test Poll 1',
-  option_1: 'Option 1',
-  option_2: 'Option 2',
-  option_3: 'Option 3',
-  option_4: 'Option 4'
-})
-  .then(insertedPoll => {
-    console.log('Inserted poll:', insertedPoll);
-  })
-  .catch(error => {
-    console.error('Error adding poll:', error);
-  });

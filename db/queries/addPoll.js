@@ -1,39 +1,43 @@
-// addPoll.js
-const db = require('../connection');
+const db = require("../connection");
 
-// addPoll helper function
-const addPoll = (pollDetails) => {
-  const {
-    email,
-    admin_link,
-    share_link,
-    title,
-    description,
-    option_1,
-    option_2,
-    option_3,
-    option_4
-  } = pollDetails;
+function generateLink() {
+  let link = "";
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 6; i++) {
+    link += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return `http://localhost:8080/${link}`;
+}
 
-  // addPoll SQL query insert into the 'polls' table
-  const addPoll = `
-    INSERT INTO polls (email, admin_link, share_link, title, description, option_1, option_2, option_3, option_4)
+function addPoll({
+  title,
+  description,
+  option_1,
+  option_2,
+  option_3,
+  option_4,
+  email,
+}) {
+  const adminLink = generateLink();
+  const shareLink = generateLink();
+  return db.query(
+    `
+    INSERT INTO polls (title, description, option_1, option_2, option_3, option_4, email, admin_link, share_link)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    RETURNING *`;
-
-  // parameters for the SQL query
-  const values = [email, admin_link, share_link, title, description, option_1, option_2, option_3, option_4];
-
-  return db.query(addPoll, values)
-    .then(data => {
-      return data.rows[0]; // returns the inserted poll
-    })
-    .catch(error => {
-      // Handle the error here
-      console.error('Error adding poll:', error);
-      throw error; // Re-throw the error to propagate it to the caller
-    });
-};
-
+    RETURNING *
+  `,
+    [
+      title,
+      description,
+      option_1,
+      option_2,
+      option_3,
+      option_4,
+      email,
+      adminLink,
+      shareLink,
+    ]
+  );
+}
 
 module.exports = { addPoll };
