@@ -13,7 +13,7 @@ const getPoll = function(poll_id) {
 };
 
 // call getPoll function to test
-getPoll()
+getPoll(4)
   .then(result => {
     console.log('Query Result:', result); // Log the entire result object
     console.log('Fetched Rows:', result.rows); // Log the fetched rows
