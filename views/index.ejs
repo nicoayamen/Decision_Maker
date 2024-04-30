@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Decision Maker</title>
 
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <title>Decision Maker</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/layout.css" />
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
-    <script src="/vendor/jquery-3.0.0.js"></script>
-    <script defer src="/scripts/app.js"></script>
-  </head>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
 
-  <body>
-    <%- include('partials/_header') %>
-    <!-- Greeting user will see once login -->
-    <div id="greeting">
-      <h1>Make A Decision!</h1>
-      <p id="underHeading">Once you're ready, make some decisions!</p>
-    </div>
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+  <!-- Greeting user will see once login -->
+  <div id="greeting">
+    <h1>Make A Decision!</h1>
+    <p class="underHeading">Once you're ready, make some desicions!</p>
+    <p class="underHeading">Make a decision, then some options related to it!</p>
+  </div>
 
   <!-- Input table starts here -->
   <div id="inputTable">
@@ -55,57 +57,4 @@
   </div>
 </body>
 
-    <!-- Input table starts here -->
-    <div id="inputTable">
-      <form action="/confirm" method="POST">
-        <table id="decisionTable">
-          <tbody>
-            <tr class="tableTextBox">
-              <input
-                type="text"
-                name="title"
-                placeholder="What is your Decision"
-              />
-            </tr>
-            <tr class="tableTextBox">
-              <input
-                type="text"
-                name="description"
-                placeholder="Describe Your Dilemma"
-              />
-            </tr>
-            <tr class="tableTextBox">
-              <input
-                type="text"
-                name="option_1"
-                placeholder="Now, what else would you like to do..."
-              />
-            </tr>
-            <tr class="tableTextBox">
-              <input
-                type="text"
-                name="option_2"
-                placeholder="What else would you like to do..."
-              />
-            </tr>
-            <tr class="tableTextBox">
-              <input type="text" name="option_3" placeholder="Almost Done..." />
-            </tr>
-            <tr class="tableTextBox">
-              <input type="text" name="option_4" placeholder="Last One..." />
-            </tr>
-            <tr class="tableTextBox">
-              <input
-                type="text"
-                name="email"
-                placeholder="Now, what's your email..."
-              />
-            </tr>
-          </tbody>
-        </table>
-        <!--Input Table ends-->
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </body>
 </html>
