@@ -13,19 +13,23 @@ body {
 
   input[type=text] {
     margin-bottom: 10px;
-    height: 32px;
-    width: 257px;
+    height: 3.5vh;
+    width: 25vw;
     border: solid 1px black;
 
   }
 
   span {
     margin-bottom: 10px;
-    height: 32px;
-    width: 257px;
+    height: 3.8vh;
+    width: 25vw;
     border: solid 1px black;
     background-color: #FFF;
-    font-size: 13px;
+    font-size: 2em;
+  }
+
+  #title {
+    margin-bottom: 25px;
   }
 }
 
