@@ -1,7 +1,8 @@
+-- polls_schema.sql
 -- Drop and recreate Polls table
 DROP TABLE IF EXISTS polls CASCADE;
 CREATE TABLE polls (
-  poll_id SERIAL PRIMARY KEY NOT NULL,
+  poll_id SERIAL PRIMARY KEY,
   email VARCHAR(255),
   admin_link VARCHAR(255),
   share_link VARCHAR(255),

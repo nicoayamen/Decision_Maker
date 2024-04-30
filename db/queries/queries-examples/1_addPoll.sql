@@ -1,4 +1,4 @@
--- Query: Add Poll
+ -- Query: Add Poll
 
 -- This query will be used in the addPoll helper function.
 -- The addPoll function will insert the polls details from the 'Make a Poll' page into the database.

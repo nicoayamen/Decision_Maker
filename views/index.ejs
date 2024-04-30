@@ -1,59 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Decision Maker</title>
 
-<head>
-  <title>Decision Maker</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+  </head>
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-</head>
+  <body>
+    <%- include('partials/_header') %>
+    <!-- Greeting user will see once login -->
+    <div id="greeting">
+      <h1>Make A Decision!</h1>
+      <p id="underHeading">Once you're ready, make some decisions!</p>
+    </div>
 
-<body>
-  <%- include('partials/_header') %>
-  <!-- Greeting user will see once login -->
-  <div id="greeting">
-    <h1>Make A Decision!</h1>
-    <p id="underHeading">Once you're ready, make some desicions!</p>
-  </div>
-
-  <!-- Input table starts here -->
-  <div id="inputTable">
-    <form action="/confirm" method="GET">
-      <table id="decisionTable">
-        <tbody>
-          <tr class="tableTextBox">
-            <input type="text" name="decision1" placeholder="What is your Decision" />
-          </tr>
-          <tr class="tableTextBox">
-            <input type="text" name="decision2" placeholder="Now, what else would you like to do..." />
-          </tr>
-          <tr class="tableTextBox">
-            <input type="text" name="decision3" placeholder="What else would you like to do..." />
-          </tr>
-          <tr class="tableTextBox">
-            <input type="text" name="decision4" placeholder="Almost Done..." />
-          </tr>
-          <tr class="tableTextBox">
-            <input type="text" name="decision5" placeholder="Last One..." />
-          </tr>
-          <tr class="tableTextBox">
-            <input type="text" name="adminEmail" placeholder="Now, what's your email..." />
-          </tr>
-        </tbody>
-      </table>
-      <!--Input Table ends-->
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</body>
-
+    <!-- Input table starts here -->
+    <div id="inputTable">
+      <form action="/confirm" method="POST">
+        <table id="decisionTable">
+          <tbody>
+            <tr class="tableTextBox">
+              <input
+                type="text"
+                name="title"
+                placeholder="What is your Decision"
+              />
+            </tr>
+            <tr class="tableTextBox">
+              <input
+                type="text"
+                name="description"
+                placeholder="Describe Your Dilemma"
+              />
+            </tr>
+            <tr class="tableTextBox">
+              <input
+                type="text"
+                name="option_1"
+                placeholder="Now, what else would you like to do..."
+              />
+            </tr>
+            <tr class="tableTextBox">
+              <input
+                type="text"
+                name="option_2"
+                placeholder="What else would you like to do..."
+              />
+            </tr>
+            <tr class="tableTextBox">
+              <input type="text" name="option_3" placeholder="Almost Done..." />
+            </tr>
+            <tr class="tableTextBox">
+              <input type="text" name="option_4" placeholder="Last One..." />
+            </tr>
+            <tr class="tableTextBox">
+              <input
+                type="text"
+                name="email"
+                placeholder="Now, what's your email..."
+              />
+            </tr>
+          </tbody>
+        </table>
+        <!--Input Table ends-->
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>

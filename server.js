@@ -1,5 +1,8 @@
+// server.js
 // load .env data into process.env
 require('dotenv').config();
+// require the addPoll file for the addPoll helper function
+const { addPoll } = require('./db/queries/addPoll');
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
