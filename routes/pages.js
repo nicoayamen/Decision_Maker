@@ -41,21 +41,15 @@ router.post('/confirm', (req, res) => {
   res.redirect('confirm');
 });
 /*
-router.post('/confirm', (req, res) => {
-  // logic here that sends the data inputted from front end into db
-  // most likely need to use the function to use mailbot api
 
-  res.redirect('confirm');
-});
-
-router.post(`/${}`, (req, res) => {
+router.post(`/vote/${}`, (req, res) => {
 // logics go here to send data input in /vote to db
 // also need 
 
   res.redirect('wait');
 });
 
-router.get(`/${}`, (req, res) => {
+router.get(`/admin/${}`, (req, res) => {
   // for admin link
   res.redirect('admin')
 });
