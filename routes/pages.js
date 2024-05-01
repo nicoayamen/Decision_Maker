@@ -1,5 +1,6 @@
 // pages.js
 const express = require("express");
+const { sendEmail } = require('../db/queries/helper')
 const router = express.Router();
 // const { addPoll } = require("../db/queries/addPoll");
 // const { addPoll } = require("../db/addPollsHelper");
@@ -34,6 +35,10 @@ router.post('/confirm', (req, res) => {
   let test = req.body;
 
   const { title, option_1, option_2, option_3, option_4, email } = req.body;
+
+  sendEmail(email)
+    .then(msg => console.log(msg))
+    .catch(err => console.log(err));
 
   console.log(`confirmation of body`, test);
   console.log(`confirmation of objects destructuring`, title, option_1, option_2, option_3, option_4, email);
