@@ -1,6 +1,6 @@
 // pages.js
 const express = require("express");
-const { sendEmail } = require('../db/queries/helper')
+const { sendEmail } = require('../db/queries/helper');
 const router = express.Router();
 const { addPoll } = require("../db/queries/addPoll");
 const { getPoll } = require("../db/queries/getPoll");
@@ -51,28 +51,28 @@ router.get('/wait', (req, res) => {
 
 // need to replace this with link that shows certain decision group
 router.get('/admin', (req, res) => {
-// logic needed to show what was voted, from first to last place
+  // logic needed to show what was voted, from first to last place
 
   res.render('admin');
 });
 
 // KEEP in the event that we get description removed from the db
-// router.post('/confirm', (req, res) => {
-//   // logic here that sends the data inputted from front end into db
-//   // most likely need to use the function to use mailbot api
-//   let test = req.body;
+router.post('/confirm', (req, res) => {
+  //   // logic here that sends the data inputted from front end into db
+  //   // most likely need to use the function to use mailbot api
+  let test = req.body;
 
-//   const { title, option_1, option_2, option_3, option_4, email } = req.body;
+  const { title, option_1, option_2, option_3, option_4, email } = req.body;
 
- // sendEmail(email)
-  //  .then(msg => console.log(msg))
-  //  .catch(err => console.log(err));
+  sendEmail(email)
+    .then(msg => console.log(msg))
+    .catch(err => console.log(err));
 
-//   console.log(`confirmation of body`, test);
-//   console.log(`confirmation of objects destructuring`, title, option_1, option_2, option_3, option_4, email);
+  console.log(`confirmation of body`, test);
+  console.log(`confirmation of objects destructuring`, title, option_1, option_2, option_3, option_4, email);
 
-//   res.redirect('confirm');
-// });
+  res.redirect('confirm');
+});
 /*
 
 router.post(`/vote/${}`, (req, res) => {
