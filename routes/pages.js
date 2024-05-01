@@ -11,8 +11,9 @@ router.get('/confirm', (req, res) => {
   res.render('index_confirmation_page');
 });
 
+
 // need to replace this with link that shows certain decision group
-router.get('/vote', (req, res) => {
+router.get('/vote/:poll_id', (req, res) => {
   // need logic here to show what decisions were made, and now to vote
   const poll_id = req.params.poll_id; // Extract poll_id from URL params
 
