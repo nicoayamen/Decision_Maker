@@ -55,6 +55,11 @@ router.post(`/${}`, (req, res) => {
   res.redirect('wait');
 });
 
+router.get(`/${}`, (req, res) => {
+  // for admin link
+  res.redirect('admin')
+});
+
 */
 
 /* router.post("/confirm", (req, res) => {
