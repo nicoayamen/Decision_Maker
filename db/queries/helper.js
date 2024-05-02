@@ -67,12 +67,12 @@ getPoll(3)
     console.log('Error fetching poll:', error);
   });
 
-function sendEmail(to) {
+function sendEmail(to, poll_id) {
   return mg.messages.create(process.env.DOMAIN, {
     from: `Decision Maker <${process.env.SENDER_EMAIL}>`,
     to: Array.isArray(to) ? to : [to], // Ensure to is an array
     subject: "A Decision has Been Made",
-    html: "<h1>A Vote is Needed!</h1><p>Send this email to your friends <a href=`http://localhost:8080/vote`>Share Link</a></p><p>Once they have all voted, you can see the results here <a href='http://localhost:8080/admin'>Admin Link</a></p>"
+    html: "<h1>A Vote is Needed!</h1><p>Send this email to your friends <a href=`http://localhost:8080/vote/:poll_id`>Share Link</a></p><p>Once they have all voted, you can see the results here <a href='http://localhost:8080/admin/:poll_id'>Admin Link</a></p>"
   });
 }
 
