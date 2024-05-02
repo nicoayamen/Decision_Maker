@@ -25,23 +25,23 @@
   </div>
 
   <!-- Input table starts here -->
-  <form action="/wait" method="GET">
-    <!--Use span id to gather data. between span are test values-->
-    <!--decTitle is the main decision-->
-    <ul id="decTitle">
-      <li class="decItem"><span id="title">Go to the movies</span>
-      </li>
-    </ul>
-
-    <ul id="decList">
-      <!--related sub-decisions-->
-      <li class="decItem" draggable="true"><span id="decision1">Watch Purrasic Park</span></li>
-      <li class="decItem" draggable="true"><span id="decision2">Watch No Country for Old Cats</span></li>
-      <li class="decItem" draggable="true"><span id="decision3">Watch Luigi Movie</span></li>
-      <li class="decItem" draggable="true"><span id="decision4">Watch Terrestrial</span></li>
-    </ul>
-    <button type="submit">Submit</button>
-  </form>
+    <!-- Input table starts here -->
+    <form action="/wait" method="GET">
+      <!-- Use span id to gather data. between span are test values -->
+      <!-- decTitle is the main decision -->
+      <ul id="decTitle">
+        <li class="decItem"><span id="title"><%= title %></span></li>
+      </ul>
+  
+      <ul id="decList">
+        <!-- Related sub-decisions -->
+        <li class="decItem" draggable="true"><span id="decision1"><%= option_1 %></span></li>
+        <li class="decItem" draggable="true"><span id="decision2"><%= option_2 %></span></li>
+        <li class="decItem" draggable="true"><span id="decision3"><%= option_3 %></span></li>
+        <li class="decItem" draggable="true"><span id="decision4"><%= option_4 %></span></li>
+      </ul>
+      <button type="submit">Submit</button>
+    </form>
 
 </body>
 
