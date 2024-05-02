@@ -2,8 +2,8 @@
 const express = require("express");
 const { sendEmail } = require('../db/queries/helper');
 const router = express.Router();
-const { addPoll } = require("../db/queries/addPoll");
-const { getPoll } = require("../db/queries/getPoll");
+const { addPoll } = require("../db/queries/helper");
+const { getPoll } = require("../db/queries/helper");
 // const { addPoll } = require("../db/addPollsHelper");
 
 // shows a confirmation when user submits decisions
@@ -75,15 +75,18 @@ router.post('/confirm', (req, res) => {
 });
 /*
 
-router.post(`/vote/${}`, (req, res) => {
+router.post('/vote/:poll_id', (req, res) => {
 // logics go here to send data input in /vote to db
 // also need
+// addSubmission.js
 
   res.redirect('wait');
 });
 
-router.get(`/admin/${}`, (req, res) => {
+router.get('/admin/:poll_id', (req, res) => {
   // for admin link
+  // getSubmissions.js
+
   res.redirect('admin')
 });
 
