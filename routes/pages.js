@@ -64,7 +64,7 @@ router.post('/confirm', (req, res) => {
 
   const { title, option_1, option_2, option_3, option_4, email } = req.body;
 
-  sendEmail(email)
+  sendEmail(email, getPoll)
     .then(msg => console.log(msg))
     .catch(err => console.log(err));
 
