@@ -5,7 +5,7 @@ const Mailgun = require('mailgun.js');
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({ username: process.env.USERNAME, key: process.env.MAILGUN_API_KEY });
 
-// generates random link 
+// generates random link
 function generateLink() {
   let link = "";
   const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
