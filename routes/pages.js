@@ -2,8 +2,8 @@
 const express = require("express");
 const { sendEmail } = require("../db/queries/helper");
 const router = express.Router();
-const { addPoll } = require("../db/queries/addPoll");
-const { getPoll } = require("../db/queries/getPoll");
+const { addPoll } = require("../db/queries/helper");
+const { getPoll } = require("../db/queries/helper");
 // const { addPoll } = require("../db/addPollsHelper");
 
 // shows a confirmation when user submits decisions
@@ -62,53 +62,94 @@ router.get("/admin", (req, res) => {
 });
 
 // KEEP in the event that we get description removed from the db
-router.post("/confirm", (req, res) => {
-  //   // logic here that sends the data inputted from front end into db
-  //   // most likely need to use the function to use mailbot api
-  let test = req.body;
+router.post("/confirm", async (req, res) => {
+  try {
+    const { title, option_1, option_2, option_3, option_4, email } = req.body;
 
-  const { title, option_1, option_2, option_3, option_4, email } = req.body;
-
-  addPoll({ title, option_1, option_2, option_3, option_4, email })
-    .then((result) => {
-      res.render("index_confirmation_page");
-    })
-    .catch((error) => {
-      console.error("Error submitting form:", error);
-      res.status(500).send("Error submitting form: " + error.message);
+    // Add poll
+    const pollResult = await addPoll({
+      title,
+      option_1,
+      option_2,
+      option_3,
+      option_4,
+      email,
     });
 
-  sendEmail(email)
-    .then((msg) => console.log(msg))
-    .catch((err) => console.log(err));
+    // Extract the poll_id from the pollResult or use any method to obtain the poll_id
+    const poll_id = pollResult.rows[0].poll_id; // Assuming pollResult contains the poll_id
 
-  console.log(`confirmation of body`, test);
-  console.log(
-    `confirmation of objects destructuring`,
+    // Send confirmation email
+    const emailResult = await sendEmail(email, poll_id);
+
+    // Log confirmation
+    console.log(`Poll added:`, pollResult);
+    console.log(`Email sent:`, emailResult);
+
+    // Redirect to confirmation page
+    res.render("index_confirmation_page");
+  } catch (error) {
+    // Handle errors
+    console.error("Error submitting form:", error);
+    res.status(500).send("Error submitting form: " + error.message);
+  }
+});
+
+//addSubmission.js ---> change when added to helper.js
+router.post("/vote/:poll_id", (req, res) => {
+  // logics go here to send data input in /vote to db
+  const poll_id = req.params.poll_id;
+  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+  // Call the addSubmission function to insert data into the database
+  addSubmission({
+    submission_id,
+    poll_id,
     title,
-    option_1,
-    option_2,
-    option_3,
-    option_4,
-    email
-  );
-
-  res.redirect("confirm");
-});
-/*
-
-router.post(`/vote/${}`, (req, res) => {
-// logics go here to send data input in /vote to db
-// also need
-
-  res.redirect('wait');
+    rank_1,
+    rank_2,
+    rank_3,
+    rank_4,
+  })
+    .then((result) => {
+      res.redirect("wait");
+    })
+    .catch((error) => {
+      console.log("Error adding submission:", error);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
-router.get(`/admin/${}`, (req, res) => {
+router.get("/admin/:poll_id", (req, res) => {
   // for admin link
-  res.redirect('admin')
+  // getSubmissions.js
+
+  res.redirect("admin");
 });
 
-*/
+//addSubmission.js ---> change when added to helper.js
+router.post("/vote/:poll_id", (req, res) => {
+  // logics go here to send data input in /vote to db
+  const poll_id = req.params.poll_id;
+  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+  // Call the addSubmission function to insert data into the database
+  addSubmission({
+    submission_id,
+    poll_id,
+    title,
+    rank_1,
+    rank_2,
+    rank_3,
+    rank_4,
+  })
+    .then((result) => {
+      res.redirect("wait");
+    })
+    .catch((error) => {
+      console.log("Error adding submission:", error);
+      res.status(500).send("Internal Server Error");
+    });
+});
 
 module.exports = router;

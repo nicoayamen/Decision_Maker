@@ -26,21 +26,22 @@
 
   <!-- data table starts here -->
   <div id="inputTable">
-    <span id="title">Title</span>
+    <span id="title"><%= title %></span>
     <table id="decisionTable">
       <!--Use span id to populate data. number between span are test values-->
+      <!-- using template ejs to show admin elements after borda -->
       <tbody>
         <tr class="tableTextBox">
-          <span id="option_1">1</span>
+          <span id="option_1"><%= option_1 %></span>
         </tr>
         <tr class="tableTextBox">
-          <span id="option_2">2</span>
+          <span id="option_2"><%= option_2 %></span>
         </tr>
         <tr class="tableTextBox">
-          <span id="option_3">3</span>
+          <span id="option_3"><%= option_3 %></span>
         </tr>
         <tr class="tableTextBox">
-          <span id="option_4">4</span>
+          <span id="option_4"><%= option_4 %></span>
         </tr>
       </tbody>
     </table>
