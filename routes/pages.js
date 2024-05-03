@@ -4,7 +4,8 @@ const { sendEmail } = require('../db/queries/helper');
 const router = express.Router();
 const { addPoll } = require("../db/queries/helper");
 const { getPoll } = require("../db/queries/helper");
-// const { addPoll } = require("../db/addPollsHelper");
+const { addSubmission } = require("../db/queries/addSubmission");
+
 
 // shows a confirmation when user submits decisions
 // probably remove once post logic is sound
@@ -56,7 +57,7 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
-// KEEP in the event that we get description removed from the db
+
 router.post('/confirm', async (req, res) => {
   try {
     const { title, option_1, option_2, option_3, option_4, email } = req.body;
@@ -83,62 +84,82 @@ router.post('/confirm', async (req, res) => {
   }
 });
 
+// router.post('/vote/:poll_id', async (req, res) => {
+//   try {
+//     const poll_id = req.params.poll_id;
+//     const { rank_1, rank_2, rank_3, rank_4 } = req.body;
 
-//addSubmission.js ---> change when added to helper.js
-router.post('/vote/:poll_id', (req, res) => {
-  // logics go here to send data input in /vote to db
-  const poll_id = req.params.poll_id;
-  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+//     // Call the new function that also fetches the title after adding the submission
+//     const submissionWithAdditionalData = await addSubmission({ poll_id, rank_1, rank_2, rank_3, rank_4 });
 
-    // Call the addSubmission function to insert data into the database
-    addSubmission({
-      submission_id,
-      poll_id,
-      title,
-      rank_1,
-      rank_2,
-      rank_3,
-      rank_4
-    })
-      .then(result => {
-        res.redirect('wait');
-      })
-      .catch(error => {
-        console.log("Error adding submission:", error);
-        res.status(500).send("Internal Server Error");
-      });
-  });
+//     console.log(`Submission and additional data added:`, submissionWithAdditionalData);
+
+//     // Use the combined result as needed, e.g., sending it back as a response
+//     res.send(submissionWithAdditionalData); // Uncomment if you want to send the data back
+
+//     // Redirect to wait page or handle the response as needed
+//     res.redirect('/wait');
+//   } catch (error) {
+//     console.error("Error adding submission:", error);
+//     res.status(500).send("Error adding submission: " + error.message);
+//   }
+// });
+
+// router.post('/vote/:poll_id', async (req, res) => {
+//   try {
+//     const poll_id = req.params.poll_id;
+//     const { rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+//     // Assuming you have a function to fetch title based on poll_id
+//     const poll = await getPoll(poll_id);
+//     const title = poll.rows[0].title;
+
+//     // Call the addSubmission function to insert data into the database
+//     const submissionResult = await addSubmission({ poll_id, rank_1, rank_2, rank_3, rank_4 });
+
+//     // Log confirmation
+//     console.log(`Submission added:`, submissionResult);
+
+//     // Redirect to wait page
+//     res.redirect('/wait');
+//   } catch (error) {
+//     // Handle errors
+//     console.error("Error adding submission:", error);
+//     res.status(500).send("Error adding submission: " + error.message);
+//   }
+// });
+
+
+// //addSubmission.js ---> change when added to helper.js
+// router.post('/vote/:poll_id', (req, res) => {
+//   // logics go here to send data input in /vote to db
+//   const poll_id = req.params.poll_id;
+//   const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+//   // Call the addSubmission function to insert data into the database
+//   addSubmission({
+//     submission_id,
+//     poll_id,
+//     title,
+//     rank_1,
+//     rank_2,
+//     rank_3,
+//     rank_4
+//   })
+//     .then(result => {
+//       res.redirect('wait');
+//     })
+//     .catch(error => {
+//       console.log("Error adding submission:", error);
+//       res.status(500).send("Internal Server Error");
+//     });
+// });
 
 router.get('/admin/:poll_id', (req, res) => {
   // for admin link
   // getSubmissions.js
 
-  res.redirect('admin')
+  res.redirect('admin');
 });
-
-//addSubmission.js ---> change when added to helper.js
-router.post('/vote/:poll_id', (req, res) => {
-  // logics go here to send data input in /vote to db
-  const poll_id = req.params.poll_id;
-  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
-
-    // Call the addSubmission function to insert data into the database
-    addSubmission({
-      submission_id,
-      poll_id,
-      title,
-      rank_1,
-      rank_2,
-      rank_3,
-      rank_4
-    })
-      .then(result => {
-        res.redirect('wait');
-      })
-      .catch(error => {
-        console.log("Error adding submission:", error);
-        res.status(500).send("Internal Server Error");
-      });
-  });
 
 module.exports = router;
