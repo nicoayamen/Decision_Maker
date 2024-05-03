@@ -4,6 +4,7 @@ const { sendEmail } = require('../db/queries/helper');
 const router = express.Router();
 const { addPoll } = require("../db/queries/addPoll");
 const { getPoll } = require("../db/queries/getPoll");
+const { addSubmission } = require("../db/queries/addSubmission");
 // const { addPoll } = require("../db/addPollsHelper");
 
 // shows a confirmation when user submits decisions
@@ -18,6 +19,7 @@ router.get('/vote/:poll_id', (req, res) => {
   // need logic here to show what decisions were made, and now to vote
   const poll_id = req.params.poll_id; // Extract poll_id from URL params
 
+
   // Call getPoll function with poll_id
   getPoll(poll_id).then(result => {
     const poll = result.rows[0]; // Assuming only one poll is returned
@@ -30,6 +32,7 @@ router.get('/vote/:poll_id', (req, res) => {
     // Prepare templateVars using poll data
     const templateVars = {
       title: poll.title,
+      id: poll_id,
       option_1: poll.option_1,
       option_2: poll.option_2,
       option_3: poll.option_3,
@@ -56,7 +59,6 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
-// KEEP in the event that we get description removed from the db
 router.post('/confirm', (req, res) => {
   //   // logic here that sends the data inputted from front end into db
   //   // most likely need to use the function to use mailbot api
@@ -82,15 +84,35 @@ router.post('/confirm', (req, res) => {
 
   res.redirect('confirm');
 });
-/*
 
-router.post(`/vote/${}`, (req, res) => {
-// logics go here to send data input in /vote to db
-// also need
 
-  res.redirect('wait');
+//addSubmission.js ---> change when added to helper.js
+router.post('/vote/:poll_id', (req, res) => {
+  // logics go here to send data input in /vote to db
+  const poll_id = req.params.poll_id;
+  const { title, rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+  // Call the addSubmission function to insert data into the database
+  addSubmission({
+    poll_id,
+    title,
+    rank_1,
+    rank_2,
+    rank_3,
+    rank_4
+  })
+    .then(result => {
+      res.status(200).send("OK");
+    })
+    .catch(error => {
+      console.log("Error adding submission:", error);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
+
+
+/*
 router.get(`/admin/${}`, (req, res) => {
   // for admin link
   res.redirect('admin')
