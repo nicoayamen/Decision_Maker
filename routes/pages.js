@@ -82,15 +82,34 @@ router.post('/confirm', (req, res) => {
 
   res.redirect('confirm');
 });
+
+
+//addSubmission.js ---> change when added to helper.js
+router.post('/vote/:poll_id', (req, res) => {
+  // logics go here to send data input in /vote to db
+  const poll_id = req.params.poll_id;
+  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+    // Call the addSubmission function to insert data into the database
+    addSubmission({
+      submission_id,
+      poll_id,
+      title,
+      rank_1,
+      rank_2,
+      rank_3,
+      rank_4
+    })
+      .then(result => {
+        res.redirect('wait');
+      })
+      .catch(error => {
+        console.log("Error adding submission:", error);
+        res.status(500).send("Internal Server Error");
+      });
+  });
+
 /*
-
-router.post(`/vote/${}`, (req, res) => {
-// logics go here to send data input in /vote to db
-// also need
-
-  res.redirect('wait');
-});
-
 router.get(`/admin/${}`, (req, res) => {
   // for admin link
   res.redirect('admin')
