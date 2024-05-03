@@ -2,7 +2,7 @@
 const db = require("../connection");
 
 // Helper Function: to insert the data from the Vote page
-// Inserts: submission_id, poll_id, rank_1, rank_2, rank_3, rank_4
+// Inserts: submission_id, poll_id, title, rank_1, rank_2, rank_3, rank_4
 
 function addSubmission({
   submission_id,
@@ -38,6 +38,26 @@ function addSubmission({
     throw error;
   });
 }
+// // Test the addSubmission function
+// const testSubmission = {
+//   submission_id: 11,
+//   poll_id: 1,
+//   title: "Food Test Submission",
+//   rank_1: "Chicken",
+//   rank_2: "Pork",
+//   rank_3: "Beef",
+//   rank_4: "Veggie"
+// };
 
+// // Test addSubmission
+// addSubmission(testSubmission)
+//   .then(() => {
+//     console.log("Test submission completed successfully.");
+//     process.exit(0);
+//   })
+//   .catch(error => {
+//     console.error("Error in test submission:", error);
+//     process.exit(1);
+//   });
 
 module.exports = { addSubmission };

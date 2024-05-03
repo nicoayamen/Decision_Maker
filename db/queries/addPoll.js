@@ -1,4 +1,4 @@
-// addPoll.js
+addPoll.js
 const db = require("../connection");
 
 function generateLink() {
