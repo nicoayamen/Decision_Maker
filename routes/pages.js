@@ -57,21 +57,30 @@ router.get('/admin', (req, res) => {
 });
 
 // KEEP in the event that we get description removed from the db
-router.post('/confirm', (req, res) => {
-  //   // logic here that sends the data inputted from front end into db
-  //   // most likely need to use the function to use mailbot api
-  let test = req.body;
+router.post('/confirm', async (req, res) => {
+  try {
+    const { title, option_1, option_2, option_3, option_4, email } = req.body;
 
-  const { title, option_1, option_2, option_3, option_4, email } = req.body;
+    // Add poll
+    const pollResult = await addPoll({ title, option_1, option_2, option_3, option_4, email });
 
-  sendEmail(email, getPoll)
-    .then(msg => console.log(msg))
-    .catch(err => console.log(err));
+    // Extract the poll_id from the pollResult or use any method to obtain the poll_id
+    const poll_id = pollResult.rows[0].poll_id; // Assuming pollResult contains the poll_id
 
-  console.log(`confirmation of body`, test);
-  console.log(`confirmation of objects destructuring`, title, option_1, option_2, option_3, option_4, email);
+    // Send confirmation email
+    const emailResult = await sendEmail(email, poll_id);
 
-  res.redirect('confirm');
+    // Log confirmation
+    console.log(`Poll added:`, pollResult);
+    console.log(`Email sent:`, emailResult);
+
+    // Redirect to confirmation page
+    res.render("index_confirmation_page");
+  } catch (error) {
+    // Handle errors
+    console.error("Error submitting form:", error);
+    res.status(500).send("Error submitting form: " + error.message);
+  }
 });
 /*
 
@@ -92,18 +101,18 @@ router.get('/admin/:poll_id', (req, res) => {
 
 */
 
-router.post("/confirm", (req, res) => {
-  const { title, description, option_1, option_2, option_3, option_4, email } =
-    req.body;
+// router.post("/confirm", (req, res) => {
+//   const { title, description, option_1, option_2, option_3, option_4, email } =
+//     req.body;
 
-  addPoll({ title, description, option_1, option_2, option_3, option_4, email })
-    .then((result) => {
-      res.render("index_confirmation_page");
-    })
-    .catch((error) => {
-      console.error("Error submitting form:", error);
-      res.status(500).send("Error submitting form: " + error.message);
-    });
-});
+//   addPoll({ title, description, option_1, option_2, option_3, option_4, email })
+//     .then((result) => {
+//       res.render("index_confirmation_page");
+//     })
+//     .catch((error) => {
+//       console.error("Error submitting form:", error);
+//       res.status(500).send("Error submitting form: " + error.message);
+//     });
+// });
 
 module.exports = router;
