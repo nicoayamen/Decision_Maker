@@ -5,6 +5,7 @@ const router = express.Router();
 const { addPoll } = require("../db/queries/helper");
 const { getPoll } = require("../db/queries/helper");
 const { addSubmission } = require("../db/queries/helper");
+const { getSubmission } = require("../db/queries/getSubmission");
 const db = require("../db/connection");
 // shows a confirmation when user submits decisions
 // probably remove once post logic is sound
@@ -50,12 +51,27 @@ router.get('/wait', (req, res) => {
   res.render('wait');
 });
 
-// need to replace this with link that shows certain decision group
-router.get('/admin', (req, res) => {
-  // logic needed to show what was voted, from first to last place
 
-  res.render('admin');
+router.get('/admin/:poll_id', (req, res) => {
+  const pollId = req.params.poll_id;
+  console.log(`Fetching submissions for poll ID: ${pollId}`);
+
+  getSubmission(pollId)
+    .then(result => {
+      console.log(`Query Result:`, result.rows);
+      if (result.rows.length === 0) {
+        console.log(`No submissions found for poll ID: ${pollId}`);
+      }
+      const templateVars = result.rows[0];
+
+      res.render('admin', templateVars);
+    })
+    .catch(error => {
+      console.error('Error fetching submissions:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
 });
+
 
 
 router.post('/confirm', async (req, res) => {
@@ -108,13 +124,6 @@ router.post('/vote/:poll_id', (req, res) => {
       console.log("Error adding submission:", error);
       res.status(500).send("Internal Server Error");
     });
-});
-
-router.get('/admin/:poll_id', (req, res) => {
-  // for admin link
-  // getSubmissions.js
-
-  res.redirect('admin');
 });
 
 
