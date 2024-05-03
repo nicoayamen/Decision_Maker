@@ -56,7 +56,7 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
-// KEEP in the event that we get description removed from the db
+
 router.post('/confirm', async (req, res) => {
   try {
     const { title, option_1, option_2, option_3, option_4, email } = req.body;
@@ -90,55 +90,32 @@ router.post('/vote/:poll_id', (req, res) => {
   const poll_id = req.params.poll_id;
   const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
 
-    // Call the addSubmission function to insert data into the database
-    addSubmission({
-      submission_id,
-      poll_id,
-      title,
-      rank_1,
-      rank_2,
-      rank_3,
-      rank_4
+  // Call the addSubmission function to insert data into the database
+  addSubmission({
+    submission_id,
+    poll_id,
+    title,
+    rank_1,
+    rank_2,
+    rank_3,
+    rank_4
+  })
+    .then(result => {
+      res.redirect('wait');
     })
-      .then(result => {
-        res.redirect('wait');
-      })
-      .catch(error => {
-        console.log("Error adding submission:", error);
-        res.status(500).send("Internal Server Error");
-      });
-  });
+    .catch(error => {
+      console.log("Error adding submission:", error);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+
 
 router.get('/admin/:poll_id', (req, res) => {
   // for admin link
   // getSubmissions.js
 
-  res.redirect('admin')
+  res.redirect('admin');
 });
-
-//addSubmission.js ---> change when added to helper.js
-router.post('/vote/:poll_id', (req, res) => {
-  // logics go here to send data input in /vote to db
-  const poll_id = req.params.poll_id;
-  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
-
-    // Call the addSubmission function to insert data into the database
-    addSubmission({
-      submission_id,
-      poll_id,
-      title,
-      rank_1,
-      rank_2,
-      rank_3,
-      rank_4
-    })
-      .then(result => {
-        res.redirect('wait');
-      })
-      .catch(error => {
-        console.log("Error adding submission:", error);
-        res.status(500).send("Internal Server Error");
-      });
-  });
 
 module.exports = router;
