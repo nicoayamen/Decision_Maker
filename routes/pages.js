@@ -4,8 +4,8 @@ const { sendEmail } = require('../db/queries/helper');
 const router = express.Router();
 const { addPoll } = require("../db/queries/helper");
 const { getPoll } = require("../db/queries/helper");
-// const { addPoll } = require("../db/addPollsHelper");
-
+const { addSubmission } = require("../db/queries/addSubmission");
+const db = require("../db/connection");
 // shows a confirmation when user submits decisions
 // probably remove once post logic is sound
 router.get('/confirm', (req, res) => {
@@ -29,6 +29,7 @@ router.get('/vote/:poll_id', (req, res) => {
 
     // Prepare templateVars using poll data
     const templateVars = {
+      poll_id: poll_id,
       title: poll.title,
       option_1: poll.option_1,
       option_2: poll.option_2,
@@ -84,24 +85,35 @@ router.post('/confirm', async (req, res) => {
 });
 
 
+// WHAT I THINK IS GOING ON???
+// vote.ejs: uses option_1, option_2, etc. while our submissions table is rank_1, rank_2, etc
+// This is likely why the submissions are not entering the db (proposed idea on how to solve that
+// below)
+
+// First Roadblock: When I hit submit on vote/:poll_id it is not connecting to this router.post
+// Once we get it working I think we wil need to extract option_1, option_2, option_3, option_4 from req.body
+// Second Roadblock: Then assign them like: const rank_1 = option_1, const rank_2 = option_2, etc.
+// Then we try to insert the rank_1, etc to addSubmission
+// Question: will we need a third table for the final results if we are entering these as ranks?
 //addSubmission.js ---> change when added to helper.js
 router.post('/vote/:poll_id', (req, res) => {
+  console.log('URL poll_id =', req.params.poll_id);
+  console.log('form submission req.body = ', req.body);
+
   // logics go here to send data input in /vote to db
   const poll_id = req.params.poll_id;
-  const { submission_id, rank_1, rank_2, rank_3, rank_4 } = req.body;
+  const { rank_1, rank_2, rank_3, rank_4 } = req.body;
 
   // Call the addSubmission function to insert data into the database
   addSubmission({
-    submission_id,
     poll_id,
-    title,
     rank_1,
     rank_2,
     rank_3,
     rank_4
   })
     .then(result => {
-      res.redirect('wait');
+      res.redirect('/wait');
     })
     .catch(error => {
       console.log("Error adding submission:", error);
@@ -109,13 +121,12 @@ router.post('/vote/:poll_id', (req, res) => {
     });
 });
 
-
-
 router.get('/admin/:poll_id', (req, res) => {
   // for admin link
   // getSubmissions.js
 
   res.redirect('admin');
 });
+
 
 module.exports = router;
