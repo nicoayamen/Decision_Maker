@@ -86,13 +86,10 @@ router.post('/confirm', (req, res) => {
 });
 
 
-//addSubmission.js ---> change when added to helper.js
 router.post('/vote/:poll_id', (req, res) => {
-  // logics go here to send data input in /vote to db
   const poll_id = req.params.poll_id;
   const { title, rank_1, rank_2, rank_3, rank_4 } = req.body;
 
-  // Call the addSubmission function to insert data into the database
   addSubmission({
     poll_id,
     title,
@@ -101,8 +98,8 @@ router.post('/vote/:poll_id', (req, res) => {
     rank_3,
     rank_4
   })
-    .then(result => {
-      res.status(200).send("OK");
+    .then((result) => {
+      res.render("wait");
     })
     .catch(error => {
       console.log("Error adding submission:", error);

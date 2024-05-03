@@ -1,8 +1,5 @@
-// addSubmissions
+// addSubmission.js
 const db = require("../connection");
-
-// Helper Function: to insert the data from the Vote page
-// Inserts: poll_id, title, rank_1, rank_2, rank_3, rank_4
 
 const addSubmission = function({
   poll_id,
@@ -14,18 +11,11 @@ const addSubmission = function({
 }) {
   return db.query(
     `
-    INSERT INTO submissions ( poll_id, title, rank_1, rank_2, rank_3, rank_4)
+    INSERT INTO submissions (poll_id, title, rank_1, rank_2, rank_3, rank_4)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
     `,
-    [
-      poll_id,
-      title,
-      rank_1,
-      rank_2,
-      rank_3,
-      rank_4
-    ]
+    [poll_id, title, rank_1, rank_2, rank_3, rank_4]
   )
     .then(result => {
       console.log("Submission added successfully:", result.rows[0]);
@@ -36,6 +26,9 @@ const addSubmission = function({
       throw error;
     });
 };
+
+module.exports = { addSubmission };
+
 // Test the addSubmission function
 // const testSubmission = {
 //   submission_id: 16,
@@ -57,5 +50,3 @@ const addSubmission = function({
 //     console.error("Error in test submission:", error);
 //     process.exit(1);
 //   });
-
-module.exports = { addSubmission };
