@@ -51,23 +51,23 @@ router.get("/wait", (req, res) => {
   res.render("wait");
 });
 
-router.get("/admin/:poll_id", (req, res) => {
+router.get('/admin/:poll_id', (req, res) => {
   const pollId = req.params.poll_id;
   console.log(`Fetching submissions for poll ID: ${pollId}`);
 
   getSubmission(pollId)
-    .then((result) => {
+    .then(result => {
       console.log(`Query Result:`, result.rows);
       if (result.rows.length === 0) {
         console.log(`No submissions found for poll ID: ${pollId}`);
       }
       const templateVars = result.rows[0];
 
-      res.render("admin", templateVars);
+      res.render('admin', templateVars);
     })
-    .catch((error) => {
-      console.error("Error fetching submissions:", error);
-      res.status(500).json({ error: "Internal server error" });
+    .catch(error => {
+      console.error('Error fetching submissions:', error);
+      res.status(500).json({ error: 'Internal server error' });
     });
 });
 
