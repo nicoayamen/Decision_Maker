@@ -5,7 +5,7 @@ const router = express.Router();
 const { addPoll } = require("../db/queries/helper");
 const { getPoll } = require("../db/queries/helper");
 const { addSubmission } = require("../db/queries/helper");
-// const { getSubmission } = require("../db/queries/getSubmission");
+const { getSubmission } = require("../db/queries/getSubmission");
 const db = require("../db/connection");
 // shows a confirmation when user submits decisions
 // probably remove once post logic is sound
@@ -108,9 +108,21 @@ router.post("/vote/:poll_id", (req, res) => {
   console.log("URL poll_id =", req.params.poll_id);
   console.log("form submission req.body = ", req.body);
 
-  // logics go here to send data input in /vote to db
+  // Extract data from the request body
   const poll_id = req.params.poll_id;
   const { rank_1, rank_2, rank_3, rank_4 } = req.body;
+
+  // Calculate Borda count for each option
+  const bordaCount = {};
+  const rankWeights = [3, 2, 1, 0]; // Assign weights to each rank (e.g., 1st place = 3, 2nd place = 2, etc.)
+  
+  [rank_1, rank_2, rank_3, rank_4].forEach((option, index) => {
+    bordaCount[option] = bordaCount[option] || 0;
+    bordaCount[option] += rankWeights[index]; // Add the weighted score based on the rank
+  });
+
+  // Log the calculated Borda count
+  console.log("Borda count:", bordaCount);
 
   // Call the addSubmission function to insert data into the database
   addSubmission({
@@ -119,6 +131,7 @@ router.post("/vote/:poll_id", (req, res) => {
     rank_2,
     rank_3,
     rank_4,
+    bordaCount // Include the Borda count in the data to be stored
   })
     .then((result) => {
       res.redirect("/wait");
@@ -128,5 +141,4 @@ router.post("/vote/:poll_id", (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 });
-
 module.exports = router;
