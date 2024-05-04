@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Decision Maker</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <!-- Script to show ranked options go here-->
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+  <!-- Greeting user will see once login -->
+  <div id="greeting">
+    <h1>Plan It!</h1>
+    <p class="underHeading">See the fun that is group democracy</p>
+    <p class="underHeading">or mob mentality...</p>
+  </div>
+
+  <!-- data table starts here -->
+  <div id="inputTable">
+    <span id="title"><%= title %></span>
+    <table id="decisionTable">
+      <!--Use span id to populate data. number between span are test values-->
+      <!-- using template ejs to show admin elements after borda -->
+      <tbody>
+        <tr class="tableTextBox">
+          <span id="option_1"><%= rank_1 %></span>
+        </tr>
+        <tr class="tableTextBox">
+          <span id="rank_2"><%= rank_2 %></span>
+        </tr>
+        <tr class="tableTextBox">
+          <span id="rank_3"><%= rank_3 %></span>
+        </tr>
+        <tr class="tableTextBox">
+          <span id="rank_4"><%= rank_4 %></span>
+        </tr>
+      </tbody>
+    </table>
+      <!--data Table ends-->
+  </div>
+
+</body>
+
+</html>

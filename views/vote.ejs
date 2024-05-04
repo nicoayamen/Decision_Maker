@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Decision Maker</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+    <!-- Greeting user will see once login -->
+    <div id="greeting">
+      <h1>Vote It!</h1>
+      <p class="underHeading">Vote for your favorite option by dragging and dropping!</p>
+      <p class="underHeading">First place is most favorite, last place is least favorite.</p>
+    </div>
+
+    <!-- Input table starts here -->
+    <!-- Input table starts here -->
+    <form method="POST" action="<%= poll_id %>">
+      <!-- Use span id to gather data. between span are test values -->
+      <!-- decTitle is the main decision -->
+      <ul id="decTitle">
+        <li class="decItem"><span id="title">
+            <%= title %>
+          </span></li>
+      </ul>
+
+      <ul id="decList">
+        <!-- Related sub-decisions -->
+        <!-- Option 1 -->
+        <li class="decItem" draggable="true">
+          <span id="decision1">
+            <input type="text" name="rank_1" value="<%= option_1 %>" readonly>
+          </span>
+        </li>
+
+        <!-- Option 2 -->
+        <li class="decItem" draggable="true">
+          <span id="decision2">
+            <input type="text" name="rank_2" value="<%= option_2 %>" readonly>
+          </span>
+        </li>
+
+        <!-- Option 3 -->
+        <li class="decItem" draggable="true">
+          <span id="decision3">
+            <input type="text" name="rank_3" value="<%= option_3 %>" readonly>
+          </span>
+        </li>
+
+        <!-- Option 4 -->
+        <li class="decItem" draggable="true">
+          <span id="decision4">
+            <input type="text" name="rank_4" value="<%= option_4 %>" readonly>
+          </span>
+        </li>
+
+      </ul>
+      <button type="submit">Submit</button>
+    </form>
+
+</body>
+
+</html>

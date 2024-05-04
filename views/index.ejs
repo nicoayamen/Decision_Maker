@@ -22,36 +22,37 @@
   <!-- Greeting user will see once login -->
   <div id="greeting">
     <h1>Make A Decision!</h1>
-    <p id="underHeading">Once you're ready, make some desicions!</p>
+    <p class="underHeading">Once you're ready, make some desicions!</p>
+    <p class="underHeading">Make a decision, then some options related to it!</p>
   </div>
 
   <!-- Input table starts here -->
   <div id="inputTable">
-    <form action="/" method="POST">
+    <form action="/confirm" method="POST">
       <table id="decisionTable">
         <tbody>
           <tr class="tableTextBox">
-            <input type="text" name="decision1" placeholder="What is your Decision" />
+            <input type="text" name="title" id="title" placeholder="What is your Main Decision" />
           </tr>
           <tr class="tableTextBox">
-            <input type="text" name="decision2" placeholder="Now, what else would you like to do..." />
+            <input type="text" name="option_1" id="option_1" placeholder="Related decision 1" />
           </tr>
           <tr class="tableTextBox">
-            <input type="text" name="decision3" placeholder="What else would you like to do..." />
+            <input type="text" name="option_2" id="option_2" placeholder="Related decision 2" />
           </tr>
           <tr class="tableTextBox">
-            <input type="text" name="decision4" placeholder="Almost Done..." />
+            <input type="text" name="option_3" id="option_3" placeholder="Related decision 3" />
           </tr>
           <tr class="tableTextBox">
-            <input type="text" name="decision5" placeholder="Last One..." />
+            <input type="text" name="option_4" id="option_4" placeholder="Related decision 4" />
           </tr>
           <tr class="tableTextBox">
-            <input type="text" name="adminEmail" placeholder="Now, what's your email..." />
+            <input type="text" name="email" placeholder="Now, what's your email..." />
           </tr>
         </tbody>
       </table>
       <!--Input Table ends-->
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </div>
 </body>

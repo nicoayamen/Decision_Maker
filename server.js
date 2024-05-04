@@ -1,5 +1,10 @@
+// server.js
 // load .env data into process.env
 require('dotenv').config();
+// // require the addPoll file for the addPoll helper function
+const { addPoll } = require('./db/queries/helper');
+// // // require the getPoll file for the getPoll helper function
+// // const { getPoll } = require('./db/queries/getPoll');
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
@@ -31,6 +36,7 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const pagesRoutes = require('./routes/pages');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -38,6 +44,8 @@ const usersRoutes = require('./routes/users');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+// so that pages generate as /${page} as opposed to above, which would be /${/users/page}
+app.use('', pagesRoutes)
 // Note: mount other resources here, using the same pattern above
 
 // Home page
