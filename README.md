@@ -42,3 +42,54 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+
+## Ready to Make a Decision!
+Make your own polls to send to your friends! Never spend another Friday night at home, bored again!
+
+![Make a Decision - Blank](<images/Make a Decision Blank.png>)
+
+Fill out your poll with whatever you want!
+
+![Make a Decision- Filled](<images/Make a Decision Filled.png>)
+
+## Share the Link with your Friends & Track the Results!
+You will be emailed two handy links.
+
+![Email It](<images/Email It.png>)
+
+## Share Link and Admin Link
+Use our handy share link to send it to your friends. Then wait for the votes to roll in and check the results via your own admin link.
+![Links](<images/Vote Needed Email.png>)
+
+## Drag and Drop your Votes!
+Use the drag and drop feature to order your options from what you want to do most to least, then submit your vote!
+
+![Vote It](<images/Vote It.png>)
+
+![Wait for It](<images/Wait for It.png>)
+
+## It's a Plan!
+See what everyone wants to do most and get out and enjoy yourself!
+
+![Plan](<images/Plan It.png>)
+
+
+## Ready to Get Started?
+
+1. Git clone this git repo using git clone command:
+
+       git clone git@github.com:nicoayamen/Decision_Maker.git
+
+2. Install all dependencies:
+
+       npm install -i
+
+3. Start the server:
+
+        npm start
+
+4. Open your browser to localhost:8080/
+
+
+5. Start making your decisions!
