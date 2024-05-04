@@ -7,5 +7,6 @@ CREATE TABLE submissions(
   rank_1 VARCHAR(255),
   rank_2 VARCHAR(255),
   rank_3 VARCHAR(255),
-  rank_4 VARCHAR(255)
+  rank_4 VARCHAR(255),
+  bordaCount JSONB
 );
