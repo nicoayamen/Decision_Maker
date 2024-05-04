@@ -84,12 +84,13 @@ function addSubmission({
   rank_1,
   rank_2,
   rank_3,
-  rank_4
+  rank_4,
+  bordaCount,
 }) {
   return db.query(
     `
-    INSERT INTO submissions (poll_id, rank_1, rank_2, rank_3, rank_4)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO submissions (poll_id, rank_1, rank_2, rank_3, rank_4, bordaCount)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
     `,
     [
@@ -97,7 +98,8 @@ function addSubmission({
       rank_1,
       rank_2,
       rank_3,
-      rank_4
+      rank_4,
+      JSON.stringify(bordaCount)
     ]
   )
     .then(result => {
