@@ -74,23 +74,5 @@ See what everyone wants to do most and get out and enjoy yourself!
 ![Plan](<images/Plan It.png>)
 
 
-## Ready to Get Started?
-1. Git clone this git repo using git clone command:
-
-  `git clone git@github.com:nicoayamen/Decision_Maker.git`
-
-2. Install all dependencies:
-
-  `npm install -i`
-
-3. Start the server:
-
-  `npm start`
-
-4. Open your browser to localhost:8080/
-
-
-5. Start making your decisions!
-
 ## Contributors
 @nicoayamen, @charleysmithschofield, @danminogue
