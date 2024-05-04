@@ -7,21 +7,22 @@ const { getPoll } = require("../db/queries/helper");
 const { addSubmission } = require("../db/queries/helper");
 const { getSubmission } = require("../db/queries/helper");
 const db = require("../db/connection");
-// shows a confirmation when user submits decisions
-// probably remove once post logic is sound
+
+
+// GET for confirm page
 router.get("/confirm", (req, res) => {
   res.render("index_confirmation_page");
 });
 
-// need to replace this with link that shows certain decision group
+// GET for vote page
 router.get("/vote/:poll_id", (req, res) => {
-  // need logic here to show what decisions were made, and now to vote
-  const poll_id = req.params.poll_id; // Extract poll_id from URL params
+  // Extract poll_id from URL params
+  const poll_id = req.params.poll_id;
 
   // Call getPoll function with poll_id
   getPoll(poll_id)
     .then((result) => {
-      const poll = result.rows[0]; // Assuming only one poll is returned
+      const poll = result.rows[0];
 
       // Check if poll exists
       if (!poll) {
@@ -47,20 +48,24 @@ router.get("/vote/:poll_id", (req, res) => {
     });
 });
 
+// GET route for wait page
 router.get("/wait", (req, res) => {
   res.render("wait");
 });
 
+// GET route for admin page
 router.get('/admin/:poll_id', (req, res) => {
+  // Extract poll_id from URL params
   const pollId = req.params.poll_id;
-  console.log(`Fetching submissions for poll ID: ${pollId}`);
+  //console.log(`Fetching submissions for poll ID: ${pollId}`);
 
   getSubmission(pollId)
     .then(result => {
-      console.log(`Query Result:`, result.rows);
+     // console.log(`Query Result:`, result.rows);
       if (result.rows.length === 0) {
-        console.log(`No submissions found for poll ID: ${pollId}`);
+     //   console.log(`No submissions found for poll ID: ${pollId}`);
       }
+      // Prepare template vars
       const templateVars = result.rows[0];
 
       res.render('admin', templateVars);
@@ -71,6 +76,7 @@ router.get('/admin/:poll_id', (req, res) => {
     });
 });
 
+// POST for confirm page
 router.post("/confirm", async (req, res) => {
   try {
     const { title, option_1, option_2, option_3, option_4, email } = req.body;
@@ -92,8 +98,8 @@ router.post("/confirm", async (req, res) => {
     const emailResult = await sendEmail(email, poll_id);
 
     // Log confirmation
-    console.log(`Poll added:`, pollResult);
-    console.log(`Email sent:`, emailResult);
+   // console.log(`Poll added:`, pollResult);
+   // console.log(`Email sent:`, emailResult);
 
     // Redirect to confirmation page
     res.render("index_confirmation_page");
@@ -104,6 +110,7 @@ router.post("/confirm", async (req, res) => {
   }
 });
 
+// POST for vote page
 router.post("/vote/:poll_id", (req, res) => {
   console.log("URL poll_id =", req.params.poll_id);
   console.log("form submission req.body = ", req.body);
@@ -115,7 +122,7 @@ router.post("/vote/:poll_id", (req, res) => {
   // Calculate Borda count for each option
   const bordaCount = {};
   const rankWeights = [3, 2, 1, 0]; // Assign weights to each rank (e.g., 1st place = 3, 2nd place = 2, etc.)
-  
+
   [rank_1, rank_2, rank_3, rank_4].forEach((option, index) => {
     bordaCount[option] = bordaCount[option] || 0;
     bordaCount[option] += rankWeights[index]; // Add the weighted score based on the rank
@@ -141,4 +148,6 @@ router.post("/vote/:poll_id", (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 });
+
+
 module.exports = router;

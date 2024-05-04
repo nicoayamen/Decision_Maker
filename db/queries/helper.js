@@ -45,7 +45,7 @@ function addPoll({
   );
 };
 
-// gets data from db of polll
+// gets data from db of poll
 const getPoll = function(poll_id) {
   return db.query(
     `
