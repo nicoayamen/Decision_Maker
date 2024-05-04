@@ -5,7 +5,7 @@ const router = express.Router();
 const { addPoll } = require("../db/queries/helper");
 const { getPoll } = require("../db/queries/helper");
 const { addSubmission } = require("../db/queries/helper");
-const { getSubmission } = require("../db/queries/getSubmission");
+const { getSubmission } = require("../db/queries/helper");
 const db = require("../db/connection");
 // shows a confirmation when user submits decisions
 // probably remove once post logic is sound
