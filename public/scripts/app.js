@@ -27,23 +27,84 @@ function handleDragEnter(event) {
 function handleDragLeave(event) {
   event.target.classList.remove("dragover");
 }
+let bordaCount = {};
 
 function handleDrop(event) {
   event.preventDefault();
   event.target.classList.remove("dragover");
   const dropTarget = event.target.closest(".decItem");
+
   if (dropTarget) {
     const dropIndex = Array.from(dropTarget.parentNode.children).indexOf(
       dropTarget
     );
-    const draggingIndex = Array.from(draggingElement.parentNode.children).indexOf(
-      draggingElement
-    );
-    if (dropIndex > draggingIndex) {
-      dropTarget.parentNode.insertBefore(draggingElement, dropTarget.nextSibling);
-    } else {
-      dropTarget.parentNode.insertBefore(draggingElement, dropTarget);
-    }
+    const draggingIndex = Array.from(
+      draggingElement.parentNode.children
+    ).indexOf(draggingElement);
+    const inputs = Array.from(todoList.querySelectorAll("input[type='text']"));
+
+    // Update the rankings based on the drop position
+    inputs.forEach((input, index) => {
+      if (index === dropIndex) {
+        const itemName = draggingElement.querySelector("input").value;
+        bordaCount[itemName] = bordaCount[itemName] || 0;
+        bordaCount[itemName] += inputs.length - index - 1;
+      } else if (index < draggingIndex && index >= dropIndex) {
+        const itemName = inputs[index + 1].value;
+        bordaCount[itemName] = bordaCount[itemName] || 0;
+        bordaCount[itemName]++;
+      } else if (index > draggingIndex && index <= dropIndex) {
+        const itemName = inputs[index - 1].value;
+        bordaCount[itemName] = bordaCount[itemName] || 0;
+        bordaCount[itemName]--;
+      }
+    });
+
+    // Log the updated Borda count
+    console.log("Updated Borda count:", bordaCount);
   }
   draggingElement.classList.remove("dragging");
 }
+// function handleDrop(event) {
+//   event.preventDefault();
+//   event.target.classList.remove("dragover");
+//   const dropTarget = event.target.closest(".decItem");
+//   if (dropTarget) {
+//     const dropIndex = Array.from(dropTarget.parentNode.children).indexOf(
+//       dropTarget
+//     );
+//     const draggingIndex = Array.from(
+//       draggingElement.parentNode.children
+//     ).indexOf(draggingElement);
+//     const inputs = Array.from(todoList.querySelectorAll("input[type='text']"));
+
+//     inputs.forEach((input, index) => {
+//       if (index === dropIndex) {
+//         input.value = draggingElement.querySelector("input").value;
+//       } else if (index > dropIndex && index <= draggingIndex) {
+//         input.value = inputs[index - 1].value;
+//       } else if (index < dropIndex && index >= draggingIndex) {
+//         input.value = inputs[index + 1].value;
+//       }
+//     });
+
+//     // Logging the updated values of rank_1, rank_2, etc.
+//     console.log(
+//       "Updated rank_1:",
+//       inputs.find((input) => input.name === "rank_1").value
+//     );
+//     console.log(
+//       "Updated rank_2:",
+//       inputs.find((input) => input.name === "rank_2").value
+//     );
+//     console.log(
+//       "Updated rank_3:",
+//       inputs.find((input) => input.name === "rank_3").value
+//     );
+//     console.log(
+//       "Updated rank_4:",
+//       inputs.find((input) => input.name === "rank_4").value
+//     );
+//   }
+//   draggingElement.classList.remove("dragging");
+// }
